@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrowdStrike Falcon — Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@400;700&family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="preview-banner">
+    Preview Mode
+    <!-- DEV SHORTCUTS — uncomment to re-enable
+    <a id="devSkipLink" style="margin-left:24px; color:#fff; font-weight:400; font-size:12px; opacity:0.75; text-decoration:underline; cursor:pointer;">
+      ⚡ Skip to verification screen
+    </a>
+    <a id="devExpireLink" style="margin-left:16px; color:#fff; font-weight:400; font-size:12px; opacity:0.75; text-decoration:underline; cursor:pointer;">
+      ⏱ Trigger expired state
+    </a>
+    <a id="devSuccessLink" style="margin-left:16px; color:#fff; font-weight:400; font-size:12px; opacity:0.75; text-decoration:underline; cursor:pointer;">
+      ✓ Skip to success screen
+    </a>
+    -->
+  </div>
+
+  <div class="page-wrap">
+
+    <!-- ── LEFT PANEL ── -->
+    <div class="left-panel">
+
+      <div class="logo-bar">
+        <img src="https://tackle-sso-uploads.s3.amazonaws.com/ec929fb8-c785-4d92-a64d-39f0011b7b5c/1761139522-1757093065-1618336790-crowdstrike.png" alt="CrowdStrike" width="300">
+      </div>
+
+      <!-- ══ SCREEN 1: FORM ══ -->
+      <div class="screen active" id="screen1">
+
+        <div class="form-header">
+          <h1>One more step...</h1>
+          <p>Thank you for your interest in the <strong>CrowdStrike Falcon for AWS (pay-as-you-go)</strong> free trial. Complete your registration now to activate your access. Your trial is not active until this form has been submitted.</p>
+        </div>
+
+        <div class="form-body">
+          <div class="field">
+            <label for="company">Company<span class="req">*</span></label>
+            <input type="text" id="company" autocomplete="off" readonly>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="firstName">First Name<span class="req">*</span></label>
+              <input type="text" id="firstName" autocomplete="off" readonly>
+            </div>
+            <div class="field">
+              <label for="lastName">Last Name<span class="req">*</span></label>
+              <input type="text" id="lastName" autocomplete="off" readonly>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="address">Company Address<span class="req">*</span></label>
+            <div class="address-wrap">
+              <input type="text" id="address" autocomplete="off">
+              <div class="suggestions" id="suggestions"></div>
+            </div>
+          </div>
+
+          <div class="field" id="emailFieldWrapper">
+            <label for="email">Email Address<span class="req">*</span></label>
+            <input type="email" id="email" autocomplete="off" readonly
+                   aria-describedby="emailError" aria-invalid="false">
+            <div class="field-error" id="emailError" role="alert" aria-live="polite"></div>
+          </div>
+
+          <button class="primary-btn" id="sendCodeBtn" disabled>Send Verification Code</button>
+
+          <p class="legal">
+            By submitting this form, I agree that my information will be shared with
+            <strong>CrowdStrike</strong> and <a href="#">Tackle.io</a> in accordance with the
+            <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.
+          </p>
+        </div>
+
+        <div class="left-footer">
+          <div class="powered-by">
+            <span>powered by</span>
+            <img src="img/Tackle_Logo.png" alt="Tackle.io" width="128">
+          </div>
+          <div class="bottom-links">
+            aws marketplace
+            <span class="sep">|</span>
+            <a href="#">Privacy Policy</a>
+            <span class="sep">|</span>
+            <a href="#">Terms of Use</a>
+            <span class="sep">|</span>
+            <span>© 2026 Tackle.io, Inc.</span>
+          </div>
+        </div>
+
+      </div><!-- /screen1 -->
+
+      <!-- ══ SCREEN 2: VERIFY ══ -->
+      <div class="screen" id="screen2">
+
+        <div class="verify-body">
+
+          <a class="back-link" id="backLink">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M10 3L5 8l5 5" stroke="#0052CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Back
+          </a>
+
+          <h2 class="verify-heading">Check your email</h2>
+          <p class="verify-sub">We sent a <strong>6-digit verification</strong> code to the address below. Enter it here to complete your registration.</p>
+
+          <div class="email-chip">
+            <img src="img/Email_icon.png" alt="" class="chip-icon">
+            <span class="chip-addr" id="chipEmail">—</span>
+            <span class="chip-change" id="chipChange">Change</span>
+          </div>
+
+          <div class="field code-field">
+            <label for="codeInput">Verification code <span class="req">*</span></label>
+            <div class="code-input-wrap">
+              <input type="text" id="codeInput" maxlength="6" placeholder="······" inputmode="numeric">
+            </div>
+            <div class="code-feedback" id="codeSuccess">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <circle cx="7.5" cy="7.5" r="7.5" fill="#16a34a"/>
+                <path d="M4 7.5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Email verified
+            </div>
+            <div class="code-feedback error-msg" id="codeError">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M7.25 1.75a.87.87 0 0 1 1.5 0l6.37 11a.87.87 0 0 1-.75 1.31H2.63a.87.87 0 0 1-.75-1.31l6.37-11Z" fill="#DE350B"/>
+                <path d="M8 6.5v3M8 11v.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+              Incorrect code. Please try again
+            </div>
+            <div class="expiry-resend-row" id="expiryResendRow">
+              <div class="expiry-note" id="expiryNote">Code expires in <span class="timer" id="expiryTimer">09:47</span></div>
+              <a class="resend-link" id="resendLink">Resend code</a>
+            </div>
+            <div class="expired-banner" id="expiredBanner">
+              <img src="img/Info_icon.png" alt="" style="width:16px;height:16px;flex-shrink:0;object-fit:contain">
+              Your code has expired. Please request a new one.
+              <a class="resend-link expired-banner-resend" id="resendLinkExpired">Resend code</a>
+            </div>
+          </div>
+
+          <button class="primary-btn" id="submitBtn" disabled>Complete Registration</button>
+
+          <p class="legal">
+            By submitting this form, I agree that my information will be shared with
+            <strong>CrowdStrike</strong> and <a href="#">Tackle.io</a> in accordance with the
+            <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.
+          </p>
+
+        </div>
+
+        <div class="left-footer">
+          <div class="powered-by">
+            <span>powered by</span>
+            <img src="img/Tackle_Logo.png" alt="Tackle.io" width="128">
+          </div>
+          <div class="bottom-links">
+            aws marketplace
+            <span class="sep">|</span>
+            <a href="#">Privacy Policy</a>
+            <span class="sep">|</span>
+            <a href="#">Terms of Use</a>
+            <span class="sep">|</span>
+            <span>© 2026 Tackle.io, Inc.</span>
+          </div>
+        </div>
+
+      </div><!-- /screen2 -->
+
+      <!-- ══ SCREEN 3: SUCCESS ══ -->
+      <div class="screen" id="screen3">
+
+        <div class="success-body">
+
+          <div class="success-banner">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" style="flex-shrink:0">
+              <rect width="20" height="20" rx="3" fill="#253858"/>
+              <path d="M5 10l3.5 3.5 6.5-7" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Registration submitted for <strong id="successEmail"></strong>.</span>
+          </div>
+
+          <p class="success-body-text">
+            You will receive an email from CrowdStrike (<a href="mailto:awsmp@crowdstrike.com">awsmp@crowdstrike.com</a>) regarding next steps.
+          </p>
+
+          <p class="success-body-text">
+            If you do not receive an email in <strong>15 minutes</strong>, please reach out to <a href="mailto:awsmp@crowdstrike.com">awsmp@crowdstrike.com</a>.
+          </p>
+
+        </div>
+
+        <div class="left-footer">
+          <div class="powered-by">
+            <span>powered by</span>
+            <img src="img/Tackle_Logo.png" alt="Tackle.io" width="128">
+          </div>
+          <div class="bottom-links">
+            aws marketplace
+            <span class="sep">|</span>
+            <a href="#">Privacy Policy</a>
+            <span class="sep">|</span>
+            <a href="#">Terms of Use</a>
+            <span class="sep">|</span>
+            <span>© 2026 Tackle.io, Inc.</span>
+          </div>
+        </div>
+
+      </div><!-- /screen3 -->
+
+    </div><!-- /left-panel -->
+
+    <!-- ── RIGHT PANEL ── -->
+    <div class="right-panel">
+      <svg class="geo" viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="r1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E01B22" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#7a0000" stop-opacity="0.4"/>
+          </linearGradient>
+          <linearGradient id="r2" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ff2a2a" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#E01B22" stop-opacity="0.1"/>
+          </linearGradient>
+          <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#333" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#111" stop-opacity="0.3"/>
+          </linearGradient>
+        </defs>
+        <polygon points="400,0 800,0 800,600 500,900 200,700" fill="url(#r1)" opacity="0.7"/>
+        <polygon points="600,0 800,0 800,400" fill="url(#r2)" opacity="0.5"/>
+        <polygon points="0,300 300,100 500,400 200,700 0,600" fill="url(#g1)" opacity="0.6"/>
+        <polygon points="350,50 700,50 750,300 500,500 300,350" fill="#E01B22" opacity="0.25"/>
+        <line x1="200" y1="0" x2="600" y2="900" stroke="#E01B22" stroke-width="1" opacity="0.2"/>
+        <g fill="#E01B22" opacity="0.3">
+          <circle cx="620" cy="80" r="2"/><circle cx="640" cy="80" r="2"/><circle cx="660" cy="80" r="2"/>
+          <circle cx="660" cy="100" r="2"/><circle cx="660" cy="120" r="2"/>
+          <circle cx="700" cy="160" r="2"/><circle cx="720" cy="160" r="2"/><circle cx="720" cy="180" r="2"/>
+        </g>
+      </svg>
+    </div>
+
+  </div><!-- /page-wrap -->
+
+  <script src="js/main.js"></script>
+</body>
+</html>

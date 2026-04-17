@@ -181,22 +181,10 @@ document.addEventListener('click', (e) => {
 
 // ── FORM VALIDATION ──
 
-const DOMAIN_TYPOS = {
-  'gmil.com':    'gmail.com',
-  'gmaill.com':  'gmail.com',
-  'gmal.com':    'gmail.com',
-  'gamil.com':   'gmail.com',
-  'gmai.com':    'gmail.com',
-  'yaho.com':    'yahoo.com',
-  'yahooo.com':  'yahoo.com',
-  'yhoo.com':    'yahoo.com',
-  'hotmial.com': 'hotmail.com',
-  'hotmal.com':  'hotmail.com',
-  'hotmai.com':  'hotmail.com',
-  'outlok.com':  'outlook.com',
-  'outloo.com':  'outlook.com',
-  'outlookk.com':'outlook.com',
-};
+const PERSONAL_DOMAINS = new Set([
+  'gmail.com', 'aol.com', 'yahoo.com', 'icloud.com', 'mac.com',
+]);
+
 
 const VALID_TLDS = new Set([
   'com','net','org','io','co','edu','gov','uk','us','ca','au',
@@ -238,9 +226,8 @@ function validateEmailFull(raw) {
     return { valid: false, type: 'incomplete', message: 'Email address appears incomplete' };
   }
 
-  if (DOMAIN_TYPOS[domain]) {
-    const suggested = `${local}@${DOMAIN_TYPOS[domain]}`;
-    return { valid: false, type: 'typo', message: `Did you mean ${suggested}?`, suggestion: suggested };
+  if (PERSONAL_DOMAINS.has(domain)) {
+    return { valid: false, type: 'personal', message: 'Please use your work email' };
   }
 
   return { valid: true };
@@ -260,17 +247,7 @@ function showEmailError(result) {
   input.setAttribute('aria-invalid', 'true');
   errorDiv.classList.add('visible');
 
-  if (result.type === 'typo') {
-    errorDiv.innerHTML =
-      `${WARNING_ICON}Did you mean <button class="suggestion-link" id="emailSuggestion">${result.suggestion}</button>?`;
-    document.getElementById('emailSuggestion').addEventListener('click', () => {
-      input.value = result.suggestion;
-      clearEmailError();
-      updateSendBtn();
-    });
-  } else {
-    errorDiv.innerHTML = `${WARNING_ICON}${result.message}`;
-  }
+  errorDiv.innerHTML = `${WARNING_ICON}${result.message}`;
 }
 
 function clearEmailError() {

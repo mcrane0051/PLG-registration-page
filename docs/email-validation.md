@@ -46,26 +46,16 @@ The domain must include a recognised extension of 2+ characters.
 
 ---
 
-### 3. Detect Common Domain Misspellings
+### 3. Block Personal Email Domains
 
-If the domain appears to be a common typo of a known provider, show an inline suggestion.
+If the domain belongs to a known personal/consumer email provider, reject it with a work email prompt.
 
-| Typed | Suggested correction |
-|---|---|
-| `gmil.com` | `gmail.com` |
-| `gmaill.com` | `gmail.com` |
-| `gmal.com` | `gmail.com` |
-| `gamil.com` | `gmail.com` |
-| `yaho.com` | `yahoo.com` |
-| `yahooo.com` | `yahoo.com` |
-| `hotmial.com` | `hotmail.com` |
-| `hotmal.com` | `hotmail.com` |
-| `outlok.com` | `outlook.com` |
-| `outloo.com` | `outlook.com` |
+**Blocked domains:**
+`gmail.com`, `aol.com`, `yahoo.com`, `icloud.com`, `mac.com`
 
-**Error message:** `Did you mean {suggested_email}?`
+**Error message:** `Please use your work email`
 
-The suggested email is a **clickable link**. Clicking it autofills the corrected address and clears the error.
+> This check runs **before** typo detection. If a user types `gmil.com` (a typo of `gmail.com`), we do not suggest the correction — we block it as a personal domain typo and show the work email error.
 
 ---
 
@@ -75,7 +65,7 @@ The suggested email is a **clickable link**. Clicking it autofills the corrected
 |---|---|
 | Format invalid (missing `@`, invalid structure) | `Enter a valid email address` |
 | Domain extension missing or incomplete | `Email address appears incomplete` |
-| Likely typo detected | `Did you mean mcrane2@gmail.com?` |
+| Personal/consumer domain used | `Please use your work email` |
 
 ---
 
